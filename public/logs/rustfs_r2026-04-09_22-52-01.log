@@ -1,0 +1,2 @@
+[2026-04-10 04:52:01.874822 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+

@@ -1,0 +1,36 @@
+{
+  "format_version": 1,
+  "meta": {
+    "disk_id": "7384e504-e42d-4199-86ed-8aa55ae6b31e",
+    "pool_index": 0,
+    "set_index": 0,
+    "disk_index": 0
+  },
+  "last_update": {
+    "secs_since_epoch": 1775954140,
+    "nanos_since_epoch": 983905000
+  },
+  "buckets_usage": {
+    "videos": {
+      "size": 205191696,
+      "replication_pending_size_v1": 0,
+      "replication_failed_size_v1": 0,
+      "replicated_size_v1": 0,
+      "replication_pending_count_v1": 0,
+      "replication_failed_count_v1": 0,
+      "objects_count": 13,
+      "object_size_histogram": {},
+      "object_versions_histogram": {},
+      "versions_count": 13,
+      "delete_markers_count": 0,
+      "replica_size": 0,
+      "replica_count": 0,
+      "replication_info": {}
+    }
+  },
+  "buckets_count": 1,
+  "objects_total_count": 13,
+  "versions_total_count": 13,
+  "delete_markers_total_count": 0,
+  "objects_total_size": 205191696
+}

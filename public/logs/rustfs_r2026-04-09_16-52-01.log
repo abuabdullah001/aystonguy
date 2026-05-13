@@ -1,0 +1,96 @@
+[2026-04-10 04:52:07.971097 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 04:57:52.231806 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 04:58:29.682300 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 04:59:51.131028 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:00:48.500609 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:01:47.207426 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:02:02.048016 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:02:07.327347 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:12:36.894513 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:12:44.672295 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:12:57.493442 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:13:03.710136 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:13:16.691546 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:16:34.087631 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:16:41.662540 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:16:50.307809 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:17:08.114552 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:17:15.028311 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:17:32.466151 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:17:38.288025 +06:00] ERROR [rustfs] [rustfs\src\main.rs:132] [main:ThreadId(1)] Server encountered an error and is shutting down: No such host is known. (os error 11001)
+
+[2026-04-10 05:23:09.423057 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(10)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-04-10 05:28:09.420494 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(10)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-04-10 05:33:09.421833 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(6)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-04-10 05:38:09.420458 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(13)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-04-10 05:38:30.097610 +06:00] ERROR [rustfs::server::http] [rustfs\src\server\http.rs:640] [rustfs-worker:ThreadId(6)] Unknown hyper error:hyper::Error(Io, Os { code: 10053, kind: ConnectionAborted, message: "An established connection was aborted by the software in your host machine." })
+
+[2026-04-10 05:38:30.097701 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:205] [rustfs-worker:ThreadId(6)] write_data_blocks write_all2 err: broken pipe
+
+[2026-04-10 05:38:30.097707 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:293] [rustfs-worker:ThreadId(6)] erasure decode write_data_blocks err: Kind(BrokenPipe)
+
+[2026-04-10 05:38:30.097770 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:2456] [rustfs-worker:ThreadId(6)] erasure.decode err 2097152 Io(Kind(BrokenPipe))
+
+[2026-04-10 05:38:30.097797 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:3784] [rustfs-worker:ThreadId(6)] get_object_with_fileinfo  videos/uploads/videos/files/vid_b202b9b5-4ca2-46df-bc24-9e3ce9c0c2e6.mp4 err Io(Kind(BrokenPipe))
+
+[2026-04-10 05:38:30.144029 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:205] [rustfs-worker:ThreadId(7)] write_data_blocks write_all2 err: broken pipe
+
+[2026-04-10 05:38:30.144151 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:293] [rustfs-worker:ThreadId(7)] erasure decode write_data_blocks err: Kind(BrokenPipe)
+
+[2026-04-10 05:38:30.144237 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:2456] [rustfs-worker:ThreadId(7)] erasure.decode err 4194304 Io(Kind(BrokenPipe))
+
+[2026-04-10 05:38:30.144260 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:3784] [rustfs-worker:ThreadId(7)] get_object_with_fileinfo  videos/uploads/videos/files/vid_b202b9b5-4ca2-46df-bc24-9e3ce9c0c2e6.mp4 err Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:10.294336 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:205] [rustfs-worker:ThreadId(12)] write_data_blocks write_all2 err: broken pipe
+
+[2026-04-10 05:39:10.294389 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:293] [rustfs-worker:ThreadId(12)] erasure decode write_data_blocks err: Kind(BrokenPipe)
+
+[2026-04-10 05:39:10.294449 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:2456] [rustfs-worker:ThreadId(12)] erasure.decode err 3145728 Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:10.295461 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:3784] [rustfs-worker:ThreadId(12)] get_object_with_fileinfo  videos/uploads/videos/files/vid_8ec60821-9045-4c7d-9a78-8ad7a5cf8a0b.mp4 err Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:10.361308 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:205] [rustfs-worker:ThreadId(4)] write_data_blocks write_all2 err: broken pipe
+
+[2026-04-10 05:39:10.361373 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:293] [rustfs-worker:ThreadId(4)] erasure decode write_data_blocks err: Kind(BrokenPipe)
+
+[2026-04-10 05:39:10.361423 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:2456] [rustfs-worker:ThreadId(4)] erasure.decode err 1048576 Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:10.361454 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:3784] [rustfs-worker:ThreadId(4)] get_object_with_fileinfo  videos/uploads/videos/files/vid_8ec60821-9045-4c7d-9a78-8ad7a5cf8a0b.mp4 err Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:37.271351 +06:00] ERROR [rustfs::server::http] [rustfs\src\server\http.rs:640] [rustfs-worker:ThreadId(4)] Unknown hyper error:hyper::Error(Io, Os { code: 10053, kind: ConnectionAborted, message: "An established connection was aborted by the software in your host machine." })
+
+[2026-04-10 05:39:37.271487 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:205] [rustfs-worker:ThreadId(4)] write_data_blocks write_all2 err: broken pipe
+
+[2026-04-10 05:39:37.271496 +06:00] ERROR [rustfs_ecstore::erasure_coding::decode] [crates\ecstore\src\erasure_coding\decode.rs:293] [rustfs-worker:ThreadId(4)] erasure decode write_data_blocks err: Kind(BrokenPipe)
+
+[2026-04-10 05:39:37.271610 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:2456] [rustfs-worker:ThreadId(4)] erasure.decode err 3145728 Io(Kind(BrokenPipe))
+
+[2026-04-10 05:39:37.271699 +06:00] ERROR [rustfs_ecstore::set_disk] [crates\ecstore\src\set_disk.rs:3784] [rustfs-worker:ThreadId(4)] get_object_with_fileinfo  videos/uploads/videos/files/vid_8ec60821-9045-4c7d-9a78-8ad7a5cf8a0b.mp4 err Io(Kind(BrokenPipe))
+
+[2026-04-10 05:43:09.421792 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(5)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
+[2026-04-10 05:58:09.420463 +06:00] ERROR [rustfs_ecstore::disk::local] [crates\ecstore\src\disk\local.rs:276] [rustfs-worker:ThreadId(13)] cleanup_deleted_objects error: Io(Os { code: 5, kind: PermissionDenied, message: "Access is denied." })
+
