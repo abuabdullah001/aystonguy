@@ -152,7 +152,7 @@ class ChatController extends Controller
             $fileType = 'voice';
         }
 
-        // 1. Save User Message
+        
         $userChat = Chat::create([
             'user_id' => $userId,
             'sender_type' => 'user',
@@ -164,7 +164,7 @@ class ChatController extends Controller
 
         $aiResponse = null;
 
-        // 2. Fetch Conversation History for Context
+        
         $history = Chat::where('user_id', $userId)
             ->whereNotNull('message')
             ->orderBy('id', 'desc')
@@ -178,12 +178,12 @@ class ChatController extends Controller
             $messages[] = ['role' => $role, 'content' => $h->message];
         }
 
-        // 2. AI Processing with OpenAI (Since it's the premium active key)
+        
         try {
             if ($request->hasFile('image')) {
-                // Image Processing logic... (keep existing)
+                
             } elseif (($request->hasFile('audio') || $fileType === 'voice') && empty($request->message)) {
-                // Determine the audio path - either from the uploaded file or the saved user chat
+                
                 $audioPath = $request->hasFile('audio') ? $request->file('audio')->path() : storage_path('app/public/' . str_replace('storage/', '', $userChat->file_path));
 
                 $response = OpenAI::audio()->transcribe([
