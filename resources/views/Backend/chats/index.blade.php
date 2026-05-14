@@ -169,6 +169,7 @@
 
             function loadMessages() {
                 $.get("{{ route('admin.chats.conversation') }}", function(res) {
+                    console.log('Chat History Loaded:', res.count, 'messages');
                     $('#chat-messages').html(res.html);
                     scrollToBottom();
                 });

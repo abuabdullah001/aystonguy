@@ -23,20 +23,16 @@ class ChatController extends Controller
     {
         $userId = auth()->id();
         
-        // If user_id was null in old chats, query by receiver_id too for transition
-        $chats = Chat::where(function($q) use ($userId) {
-                $q->where('user_id', $userId)
-                  ->orWhere('receiver_id', $userId);
-            })
-            ->where(function($q) {
-                $q->where('sender_type', 'user')
-                  ->orWhere('is_ai', true);
-            })
+        // Fetch ALL chats involving the user
+        $chats = Chat::where('user_id', $userId)
+            ->orWhere('receiver_id', $userId)
             ->oldest()
             ->get();
 
         return response()->json([
             'html' => view('Backend.chats.messages', compact('chats'))->render(),
+            'count' => $chats->count(),
+            'user_id' => $userId
         ]);
     }
 
@@ -47,16 +43,12 @@ class ChatController extends Controller
         ]);
 
         try {
-            $audioData = file_get_contents($request->file('audio')->path());
-            $result = Gemini::geminiFlash()->generateContent([
-                "Transcribe this audio precisely. Return ONLY the transcribed text, nothing else.",
-                new \Gemini\Data\Blob(
-                    mimeType: MimeType::AUDIO_WAV,
-                    data: base64_encode($audioData)
-                )
+            $response = OpenAI::audio()->transcribe([
+                'model' => 'whisper-1',
+                'file' => fopen($request->file('audio')->path(), 'r'),
             ]);
 
-            return response()->json(['text' => $result->text()]);
+            return response()->json(['text' => $response->text]);
         } catch (\Throwable $e) {
             Log::error('Transcribe Error: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 500);
@@ -95,69 +87,78 @@ class ChatController extends Controller
 
         $aiResponse = null;
 
-        // 2. AI Processing (Gemini supports vision/audio better in the same SDK call usually)
+        // 2. Fetch Conversation History for Context
+        $history = Chat::where('user_id', $userId)
+            ->whereNotNull('message')
+            ->orderBy('id', 'desc')
+            ->limit(10)
+            ->get()
+            ->reverse();
+
+        $messages = [];
+        foreach ($history as $h) {
+            $role = ($h->sender_type == 'user') ? 'user' : 'assistant';
+            $messages[] = ['role' => $role, 'content' => $h->message];
+        }
+
+        // 2. AI Processing with OpenAI (Since it's the premium active key)
         try {
             if ($request->hasFile('image')) {
-                // Image Processing with Gemini Vision
+                // Image Processing with OpenAI Vision
                 $imageData = base64_encode(file_get_contents($request->file('image')->path()));
-                $result = Gemini::geminiFlash()->generateContent([
-                    $request->message ?? "What is in this image?",
-                    new \Gemini\Data\Blob(
-                        mimeType: MimeType::IMAGE_JPEG,
-                        data: $imageData
-                    )
-                ]);
-                $aiResponse = $result->text();
-            } elseif ($request->hasFile('audio')) {
-                // Audio Processing with Gemini
-                $audioFile = $request->file('audio');
-                $audioData = file_get_contents($audioFile->path());
+                $mimeType = $request->file('image')->getMimeType();
                 
-                // Gemini PHP 2.0+ expects Blobs this way
-                // Use a more explicit prompt for transcription and response
-                $prompt = $request->message ?? "Please transcribe this audio and provide a helpful response.";
+                // Add current image message
+                $messages[] = [
+                    'role' => 'user',
+                    'content' => [
+                        ['type' => 'text', 'text' => $request->message ?? "What is in this image?"],
+                        ['type' => 'image_url', 'image_url' => ['url' => "data:{$mimeType};base64,{$imageData}"]],
+                    ],
+                ];
 
-                try {
-                    $result = Gemini::geminiFlash()->generateContent([
-                        $prompt,
-                        new \Gemini\Data\Blob(
-                            mimeType: MimeType::AUDIO_WAV,
-                            data: base64_encode($audioData)
-                        )
-                    ]);
-                    $aiResponse = $result->text();
-                } catch (\Throwable $e) {
-                    Log::error('Gemini Audio Error: ' . $e->getMessage());
-                    // Fallback to OpenAI Whisper or similar if needed, 
-                    // but for now let's try a simpler Gemini call
-                    $result = Gemini::geminiFlash()->generateContent("The user sent an audio message but I couldn't process it. Please ask them to try again or type their message.");
-                    $aiResponse = $result->text();
-                }
-                
-                // If AI returns nothing, try a fallback transcription-only approach
-                if (empty(trim($aiResponse))) {
-                     $result = Gemini::geminiFlash()->generateContent([
-                        "Transcribe the following audio precisely:",
-                        new \Gemini\Data\Blob(
-                            mimeType: MimeType::AUDIO_WAV,
-                            data: base64_encode($audioData)
-                        )
-                    ]);
-                    $aiResponse = "Transcribed Audio: " . $result->text();
-                }
-            } else {
-                // Standard Text Fallback logic
                 $result = OpenAI::chat()->create([
                     'model' => 'gpt-4o-mini',
-                    'messages' => [['role' => 'user', 'content' => $request->message]],
+                    'messages' => $messages,
+                ]);
+                $aiResponse = $result->choices[0]->message->content;
+            } elseif ($request->hasFile('audio') && empty($request->message)) {
+                // If they bypassed frontend transcription somehow
+                $response = OpenAI::audio()->transcribe([
+                    'model' => 'whisper-1',
+                    'file' => fopen($request->file('audio')->path(), 'r'),
+                ]);
+                
+                $messages[] = ['role' => 'user', 'content' => $response->text];
+
+                $result = OpenAI::chat()->create([
+                    'model' => 'gpt-4o-mini',
+                    'messages' => $messages,
+                ]);
+                $aiResponse = $result->choices[0]->message->content;
+            } else {
+                // Standard Text logic (History already added above)
+                // If history was empty or last message isn't the current one, the logic below ensures it's fresh
+                if (empty($messages) || end($messages)['content'] !== $request->message) {
+                    // History loop above handles most cases, but if we just created $userChat, 
+                    // we could also just use the $messages array we built.
+                }
+
+                $result = OpenAI::chat()->create([
+                    'model' => 'gpt-4o-mini',
+                    'messages' => $messages,
                 ]);
                 $aiResponse = $result->choices[0]->message->content;
             }
         } catch (\Throwable $e) {
+            Log::error('OpenAI General Error: ' . $e->getMessage());
             try {
-                // Secondary Fallback for everything
-                $result = Gemini::geminiFlash()->generateContent($request->message ?? "Hello");
-                $aiResponse = $result->text();
+                // Secondary Fallback for everything (simple string)
+                $result = OpenAI::chat()->create([
+                    'model' => 'gpt-4o-mini',
+                    'messages' => [['role' => 'user', 'content' => "Hello"]],
+                ]);
+                $aiResponse = $result->choices[0]->message->content;
             } catch (\Throwable $e2) {
                 $aiResponse = $this->getLocalAiResponse($request->message);
             }
